@@ -11,7 +11,7 @@ import org.generations.exceptions.StudentNotFoundException;
 public class StudentService {
 	private HashMap<String, Course> courseList = new HashMap<>();
 
-    public HashMap<String, Student> students = new HashMap<>();
+    private HashMap<String, Student> students = new HashMap<>();
 
     private HashMap<String, List<Course>> coursesEnrolledByStudents = new HashMap<>();
 
@@ -30,11 +30,11 @@ public class StudentService {
     	
     	try {
     		if (!courseList.containsKey(courseName)) {
-    		    throw new CourseNotFoundException();
+    		    throw new CourseNotFoundException("The defined course "+ courseName+" doesn't exist");
 			}
     		Course course = courseList.get( courseName );
     		if(!students.containsKey(studentID)) {
-    		    throw new StudentNotFoundException();
+    		    throw new StudentNotFoundException("The defined student "+ studentID+" doesn't exist");
 			}
     	}
     	catch (CourseNotFoundException e) {
@@ -57,14 +57,15 @@ public class StudentService {
     {
     	try {
     		if (!courseList.containsKey(courseName)) {
-    		    throw new CourseNotFoundException();
+    		    throw new CourseNotFoundException("The defined course "+ courseName+" doesn't exist");
 			}
     		Course course = courseList.get( courseName );
     		if(!students.containsKey(studentID)) {
-    		    throw new StudentNotFoundException();
+    		    throw new StudentNotFoundException("The defined student "+ studentID+" doesn't exist");
 			}
     	}
     	catch (CourseNotFoundException e) {
+    		
     		System.out.println("Try again with another course name");
 		}
     	catch (StudentNotFoundException e) {
@@ -98,10 +99,15 @@ public class StudentService {
         return courseList.get(key);
     }
 
-   
+   public void addStudent(Student student) {
+	   if (! students.containsKey(student.getId())) {
+		students.put(student.getId(), student);
+	}
+   }
     
     public void showAllCourses(){
     	courseList.forEach((key,value) -> System.out.println("Course: " + key));
-
     }
+    
+    
 }

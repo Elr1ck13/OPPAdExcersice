@@ -2,8 +2,9 @@ package org.generations.exceptions;
 
 public class StudentNotFoundException extends Exception {
 
-	  public StudentNotFoundException( )
+	  public StudentNotFoundException(String msg )
 	    {
-	        super( "Student not found!" );
+	        super(msg);
+	        System.out.println(msg);
 	    }
 }

@@ -1,8 +1,9 @@
 package org.generations.exceptions;
 
 public class CourseNotFoundException extends Exception {
-	  public CourseNotFoundException()
+	  public CourseNotFoundException(String msg)
 	    {
-	        super("Course nor found");
+	        super(msg);
+	        System.out.println(msg);
 	    }
 }
